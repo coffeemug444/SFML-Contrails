@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 
-class Ellipse : sf::Drawable {
+class Ellipse : public sf::Drawable {
 private:
     float radius;
     float a;
@@ -13,6 +13,8 @@ private:
     sf::VertexArray vertices;
 
     void redraw();
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 
 public:
     Ellipse(float _radius, float _a, float _b);
@@ -20,8 +22,9 @@ public:
     void setDetail(int new_detail);
     void setPos(sf::Vector2f pos);
     void move(sf::Vector2f dist);
+    void move(float x, float y);
     bool inside(sf::Vector2f pos);
     sf::Vector2f closestPoint(sf::Vector2f pos);
     sf::Vector2f normal(sf::Vector2f pos);
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states);
+    
 };
