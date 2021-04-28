@@ -20,13 +20,17 @@ public:
     Ellipse(float _radius, float _a, float _b);
     void setColor(sf::Color _color);
     void setDetail(int _detail);
+
     void setPos(sf::Vector2f pos);
     void setPos(float x, float y);
+
     void move(sf::Vector2f dist);
     void move(float x, float y);
+
     bool inside(sf::Vector2f pos);
     bool inside(float x, float y);
-    sf::Vector2f closestPoint(sf::Vector2f pos);
+
     sf::Vector2f normal(sf::Vector2f pos);
+    sf::Vector2f normal(float x, float y);
     
 };

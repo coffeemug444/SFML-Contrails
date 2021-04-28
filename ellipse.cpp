@@ -66,3 +66,48 @@ bool Ellipse::inside(float x, float y) {
     (y - k) * (y - k) / (b*b*radius*radius)\
     <= 1;
 }
+
+sf::Vector2f Ellipse::normal(sf::Vector2f pos) {
+    return normal(pos.x, pos.y);
+}
+
+sf::Vector2f Ellipse::normal(float x, float y) {
+    // just assume x & y are points on the ellipse, w/e
+
+    // special checks for when we're looking at y = h +- r*sqrt(a)
+    // just to avoid divide by 0 errors
+
+    if (y == h + radius*sqrt(a)) {
+        // on the very right edge of the ellipse
+        return sf::Vector2f(-1, 0);
+    } else if (y == h - radius*sqrt(a)) {
+        // on the very left edge of the ellipse
+        return sf::Vector2f(1, 0);
+    }
+
+    
+    float dy = (b*(h-x))/(a*(y-k));
+    float scale = sqrt(1 + dy*dy);
+
+    sf::Vector2f tangent(scale, scale*dy);
+
+    // now turn tangent into normal
+    // ensure the normal points inside the ellipse by
+    // checking all four quadrants
+
+    sf::Vector2f norm;
+
+    norm.y = abs(tangent.x);
+    norm.x = abs(tangent.y);
+
+    if (x > h) {
+        norm.x *= -1;
+    }
+
+    if (y > k) {
+        norm.y *= -1;
+    }
+
+    return norm;
+
+}
