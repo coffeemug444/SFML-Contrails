@@ -87,9 +87,8 @@ sf::Vector2f Ellipse::normal(float x, float y) {
 
     
     float dy = (b*(h-x))/(a*(y-k));
-    float scale = sqrt(1 + dy*dy);
 
-    sf::Vector2f tangent(scale, scale*dy);
+    sf::Vector2f tangent(1, dy);
 
     // now turn tangent into normal
     // ensure the normal points inside the ellipse by
@@ -107,6 +106,10 @@ sf::Vector2f Ellipse::normal(float x, float y) {
     if (y > k) {
         norm.y *= -1;
     }
+
+    float scale = 1.f/sqrt(norm.y*norm.y + norm.x*norm.x);
+    norm.x *= scale;
+    norm.y *= scale;
 
     return norm;
 
