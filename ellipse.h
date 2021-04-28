@@ -6,10 +6,13 @@ private:
     float radius;
     float a;
     float b;
-    float h;    // x position, higher is further to the right
-    float k;    // y position, higher is further up
+    float h = 0;    // x position, higher is further to the right
+    float k = 0;    // y position, higher is further up
+    sf::Color color = sf::Color::White;
     int detail = 100;
     sf::VertexArray vertices;
+
+    void redraw();
 
 public:
     Ellipse(float _radius, float _a, float _b);
