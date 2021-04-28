@@ -4,8 +4,8 @@
 class Ellipse : public sf::Drawable {
 private:
     float radius;
-    float a;
-    float b;
+    float a;        // horizontal eccentricity
+    float b;        // vertical eccentricity
     float h = 0;    // x position, higher is further to the right
     float k = 0;    // y position, higher is further up
     sf::Color color = sf::Color::White;
@@ -32,5 +32,7 @@ public:
 
     sf::Vector2f normal(sf::Vector2f pos);
     sf::Vector2f normal(float x, float y);
+
+    void setab(float _a, float _b);
     
 };

@@ -114,3 +114,9 @@ sf::Vector2f Ellipse::normal(float x, float y) {
     return norm;
 
 }
+
+void Ellipse::setab(float _a, float _b) {
+    a = _a;
+    b = _b;
+    redraw();
+}
