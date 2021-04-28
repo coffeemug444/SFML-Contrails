@@ -16,7 +16,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Billard");
     window.setFramerateLimit(144);  //pls don't burn my cpu
 
-    Ellipse e(150, 1.1, 0.9);
+    Ellipse e(190, 1.1, 0.9);
     e.move(640.f, 360.f);
 
     sf::Clock clock;
@@ -24,12 +24,19 @@ int main()
     sf::Int32 currTime;
     sf::Int32 delt;
 
-    sf::CircleShape circ;
-    circ.setRadius(3);
-    circ.setOrigin(sf::Vector2f(3,3));
-    circ.setFillColor(sf::Color::Green);
-    circ.setPosition(550, 360);
-    sf::Vector2f vel(0,80);
+    int num = 500;
+    sf::CircleShape circs[num];
+    for (int i = 0; i < num; i++) {
+        circs[i].setRadius(1);
+        circs[i].setFillColor(sf::Color::Green);
+        circs[i].setPosition(550 + i / 20.f, 360);
+    }
+
+    sf::Vector2f vels[num];
+    for (int i = 0; i < num; i++) {
+        vels[i].x = 20;
+        vels[i].y = 160;
+    }
 
     while (window.isOpen())
     {
@@ -44,15 +51,23 @@ int main()
         delt = currTime - prevTime;
         prevTime = currTime;
 
-        circ.move(vel.x * delt / 1000.f, vel.y * delt / 1000.f);
-
-        if (!e.inside(circ.getPosition())) {
-            vel = reflect(vel, e.normal(circ.getPosition()));
-        }
 
         window.clear();
+
+        for (int i = 0; i < num; i++) {
+            circs[i].move(vels[i].x * delt / 1000.f, vels[i].y * delt / 1000.f);
+
+            if (!e.inside(circs[i].getPosition())) {
+                circs[i].move(-vels[i].x * delt / 1000.f, -vels[i].y * delt / 1000.f);
+                vels[i] = reflect(vels[i], e.normal(circs[i].getPosition()));
+            }
+
+            window.draw(circs[i]);
+
+        }
+
+
         window.draw(e);
-        window.draw(circ);
         window.display();
     }
 
