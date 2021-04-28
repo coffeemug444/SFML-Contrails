@@ -40,6 +40,7 @@ sf::Color hsv(float in) {
         col.b = 255;
         return col;
     }
+    in -= 1;
     col.r = 255;
     col.g = 0;
     col.b = 255 * (1.f - in);

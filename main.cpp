@@ -33,15 +33,16 @@ int main()
     int num = 10000;
     sf::CircleShape circs[num];
     for (int i = 0; i < num; i++) {
-        circs[i].setRadius(1);
+        circs[i].setRadius(3);
+        circs[i].setOrigin(sf::Vector2f(3,3));
         circs[i].setFillColor(hsv((float)i / num));
         circs[i].setPosition(550 + i / 80.f, 360);
     }
 
     sf::Vector2f vels[num];
     for (int i = 0; i < num; i++) {
-        vels[i].x = 120;
-        vels[i].y = 240;
+        vels[i].x = 0;
+        vels[i].y = 300;
         vels[i] *= 0.5f;
     }
 
