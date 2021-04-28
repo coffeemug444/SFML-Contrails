@@ -35,3 +35,34 @@ void Ellipse::move(float x, float y) {
     k += y;
     redraw();
 }
+
+void Ellipse::setColor(sf::Color _color) {
+    color = _color;
+    redraw();
+}
+
+void Ellipse::setDetail(int _detail) {
+    detail = _detail;
+    redraw();
+}
+
+void Ellipse::setPos(sf::Vector2f pos) {
+    setPos(pos.x, pos.y);
+}
+
+void Ellipse::setPos(float x, float y) {
+    h = x;
+    k = y;
+    redraw();
+}
+
+bool Ellipse::inside(sf::Vector2f pos) {
+    return inside(pos.x, pos.y);
+}
+
+bool Ellipse::inside(float x, float y) {
+    return\
+    (x - h) * (x - h) / (a*a*radius*radius) +\
+    (y - k) * (y - k) / (b*b*radius*radius)\
+    <= 1;
+}
